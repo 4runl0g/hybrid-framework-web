@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -36,7 +37,8 @@ public class mypediaWebTest {
     @Test()
     public void mypediaWebTest() throws InterruptedException {
         driver.get("https://www.mypedia.pearson.com/");
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
+        WebDriverWait wait=new WebDriverWait(driver, 20);
         new LoginPage(driver).popup();
 //        new LoginPage(driver).selectLanguage();
         driver.close();
