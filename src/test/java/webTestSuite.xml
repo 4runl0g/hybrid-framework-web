@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="mypediaWebTest" verbose="1" parallel="methods"  thread-count="3">
+<suite name="mypediaWebTest" verbose="1" parallel="methods" thread-count="4">
     <test name="mypediaWebTest">
         <classes>
             <class name="mypediaWebTest"/>

@@ -1,0 +1,30 @@
+{
+  "TestCases": [
+    {
+      "testCaseId": "user01",
+      "testCaseName": "parentAcctCreation",
+      "testCaseDescription": "Account creation",
+      "testCaseParameters": {
+        "firstname": "FNrrwerwer",
+        "lastname": "LNkdhasd",
+        "email": "test1@test.com",
+        "username": "fnrrwerwer",
+        "password": "lkdhasd",
+      },
+      "execute": true
+    },
+    {
+      "testCaseId": "user02",
+      "testCaseName": "parentAcctCreation",
+      "testCaseDescription": "Account creation",
+      "testCaseParameters": {
+        "firstname": "FNfsdfsd",
+        "lastname": "LNsdfsfrer",
+        "email": "test2@test.com",
+        "username": "fnfsdfsd",
+        "password": "lnsdfsfrer",
+      },
+      "execute": true
+    }
+  ]
+}

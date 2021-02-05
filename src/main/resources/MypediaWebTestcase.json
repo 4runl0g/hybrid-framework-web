@@ -1,0 +1,44 @@
+{
+  "TestCases": [
+    {
+      "testCaseId": "mypedia01",
+      "testCaseName": "verifyLanguage",
+      "testCaseDescription": "Verify expected languages are present in drop down menu on login page",
+      "testCaseParameters": {
+          "language": "English\nहिंदी\nEspañol",
+          "continueBtn":""
+      },
+      "execute": true
+    },
+    {
+      "testCaseId": "mypedia02",
+      "testCaseName": "continueBtnValidation",
+      "testCaseDescription": "Continue button validation for ENGLISH language",
+      "testCaseParameters": {
+        "language": "English",
+        "continueBtn":"CONTINUE"
+      },
+      "execute": true
+    },
+    {
+      "testCaseId": "mypedia03",
+      "testCaseName": "continueBtnValidation",
+      "testCaseDescription": "Continue button validation for HINDI language",
+      "testCaseParameters": {
+        "language": "हिंदी",
+        "continueBtn": "अग्रसर रहें"
+      },
+      "execute": true
+    },
+    {
+      "testCaseId": "mypedia04",
+      "testCaseName": "continueBtnValidation",
+      "testCaseDescription": "Continue button validation for SPANISH language",
+      "testCaseParameters": {
+        "language": "Español",
+        "continueBtn": "CONTINUAR"
+      },
+      "execute": true
+    }
+  ]
+}

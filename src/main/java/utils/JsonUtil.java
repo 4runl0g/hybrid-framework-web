@@ -1,5 +1,6 @@
 package utils;
 
+import dataprovider.TestDataFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
@@ -12,22 +13,8 @@ import org.apache.commons.io.FileUtils;
 
 public class JsonUtil {
 
-    public JSONObject apiJSONReader(String jsonFilePath, String apiName) throws IOException {
-        File file = new File(jsonFilePath);
-        String content = FileUtils.readFileToString(new File(file.getCanonicalPath()), "utf-8");
-        JSONObject apiObject = new JSONObject(content);
-        JSONArray serviceApi = new JSONArray(apiObject.get("services").toString());
-        JSONObject serviceObj = new JSONObject();
-        for (int i = 0; i < serviceApi.length(); i++) {
-            if (serviceApi.getJSONObject(i).names().toString().contains(apiName)) {
-                JSONObject data = (JSONObject) serviceApi.get(i);
-                serviceObj = (JSONObject) data.get(apiName);
-            }
-        }
-        return serviceObj;
-    }
-
-    public Iterator<Object[]> setTestcaseData(String jsonFilePath) throws IOException {
+    //JSON file reader to iterate using dataprovider
+    public Iterator<Object[]> setTestData(String jsonFilePath, String testName) throws IOException {
         Collection<Object[]> provider = new ArrayList<Object[]>();
         File file = new File(jsonFilePath);
         String content = FileUtils.readFileToString(new File(file.getCanonicalPath()), "utf-8");
@@ -36,13 +23,23 @@ public class JsonUtil {
         for (int i = 0; i < testSuite.length(); i++) {
             JSONObject testCase = (JSONObject) testSuite.get(i);
             try {
-                if (testCase.getBoolean("execute")) {
-                    String tenantParam = testCase.getJSONObject("testCaseParameters").getString("tenant");
-
-                    provider.add(new Object[]{tenantParam});
-
-                } else {
-                    System.out.print("<********** Testcase NOT ENABLED in Dataprovider or Testcase name DOES NOT MATCH **********>");
+                if (testCase.getString("testCaseName").equalsIgnoreCase(testName) && testCase.getBoolean("execute")) {
+                    TestDataFactory dataFactory = new TestDataFactory();
+                    dataFactory.setTestcaseParameters(testCase.getJSONObject("testCaseParameters"));
+                    if (dataFactory.getTestcaseParameters().has("firstname")) {
+                        dataFactory.setFirstname(dataFactory.getTestcaseParameters().getString("firstname"));
+                        dataFactory.setLastname(dataFactory.getTestcaseParameters().getString("lastname"));
+                        dataFactory.setEmail(dataFactory.getTestcaseParameters().getString("email"));
+                        dataFactory.setUsername(dataFactory.getTestcaseParameters().getString("username"));
+                        dataFactory.setPassword(dataFactory.getTestcaseParameters().getString("password"));
+                    }
+                    if (dataFactory.getTestcaseParameters().has("language")) {
+                        String langParam = testCase.getJSONObject("testCaseParameters").getString("language");
+                        String continueBtnParam = testCase.getJSONObject("testCaseParameters").getString("continueBtn");
+                        dataFactory.setLanguage(langParam);
+                        dataFactory.setContinueBtn(continueBtnParam);
+                    }
+                    provider.add(new Object[]{dataFactory});
                 }
             } catch (Exception e) {
                 System.out.print(e);
