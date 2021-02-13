@@ -1,2 +1,1 @@
-# kosmosWeb
-Mypedia Web
+# Web automation framework
